@@ -40,28 +40,28 @@ def pomodoro_timer():
     print("="*50)
     
     while True:
-        # ✅ 第一步：输入预期结果
-        expected = input("\n📌 预期结果（计划要完成的目标）: ")
-        if not expected.strip():
+        # ✅ 输入预期结果
+        expected = input("\n📌 预期结果: ").strip()
+        if not expected:
             expected = "未设定目标"
         
-        # ✅ 第二步：工作25分钟倒计时
+        # ✅ 工作25分钟倒计时
         print("\n🍅 工作开始！专注25分钟...")
-        for i in range(1 * 5, 0, -1):
+        for i in range(25 * 60, 0, -1):
             minutes = i // 60
             seconds = i % 60
             print(f"\r剩余时间: {minutes:02d}:{seconds:02d}", end="")
             time.sleep(1)
         
-        print("\n⏰ 工作时间到！")
-        play_alarmsound()  # 工作结束提醒
+        print("\n⏰ 工作结束！")
+        play_alarmsound()
         
-        # ✅ 第三步：输入实际结果
-        actual = input("\n✅ 实际结果（实际完成的情况）: ")
-        if not actual.strip():
+        # ✅ 输入实际结果
+        actual = input("\n✅ 实际结果: ").strip()
+        if not actual:
             actual = "未完成"
         
-        # ✅ 第四步：保存到CSV
+        # ✅ 保存到CSV
         filename = "time_log.csv"
         file_exists = os.path.isfile(filename)
         
@@ -84,25 +84,24 @@ def pomodoro_timer():
         print(f"\n✅ 已记录：\n  预期: {expected}\n  实际: {actual} (25分钟)")
         print(f"📊 数据已保存到 {filename}")
         
-        # ✅ 第五步：进入5分钟休息倒计时
+        # ✅ 5分钟休息倒计时
         print("\n⏳ 休息开始！5分钟倒计时...")
-        for i in range(1 * 3, 0, -1):
+        for i in range(5 * 60, 0, -1):
             minutes = i // 60
             seconds = i % 60
             print(f"\r剩余时间: {minutes:02d}:{seconds:02d}", end="")
             time.sleep(1)
         
-        print("\n⏰ 休息时间到！")
-        play_alarmsound()  # 休息结束提醒
+        print("\n⏰ 休息结束！")
+        play_alarmsound()
         
-        # ✅ 第六步：提示是否继续
-        continue_choice = input("\n是否开始下一轮？(输入'继续（Y）'或'结束（N）'): ").strip().lower()
-        if continue_choice != 'Y':
+        # ✅ 极简输入确认
+        choice = input("\n继续下一轮？(y/n): ").strip().lower()
+        if choice != 'y':
             print("\n💡 感谢使用番茄钟！已退出程序。")
             break
     
     print("\n✨ 今日目标达成率：")
-    # 生成今日报告（可选，实际用时可简化）
     print("（如需详细报告，可运行generate_report.py）")
 
 if __name__ == "__main__":
