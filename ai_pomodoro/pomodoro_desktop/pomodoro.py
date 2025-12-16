@@ -1,6 +1,8 @@
 import sys
 from PyQt5.QtWidgets import (QApplication, QSystemTrayIcon, QMenu, QAction, QWidget)
-from PyQt5.QtGui import QIcon, QSound
+# 修正后的导入方式
+from PyQt5.QtGui import QIcon
+from PyQt5.QtMultimedia import QSound  # ✅ 正确模块
 from PyQt5.QtCore import QTimer, Qt
 
 # 1. 创建应用实例
@@ -46,7 +48,7 @@ def hide_window():
 def play_alarm():
     # 优先用QSound播放（跨平台）
     try:
-        QSound.play("Alarm01.wav")
+        QSound.play("alarm.wav")
     except:
         # 备用方案：用系统提示音
         print("\a")
